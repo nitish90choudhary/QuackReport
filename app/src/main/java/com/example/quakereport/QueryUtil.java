@@ -58,7 +58,7 @@ public class QueryUtil {
                     earthquake.setDirection("Near the");
                     earthquake.setLocation(place);
                 }
-                Log.v("QueryUtils", "" + earthquake);
+                //Log.v("QueryUtils", "" + earthquake);
                 //Add object to list
                 earthquakes.add(earthquake);
             }

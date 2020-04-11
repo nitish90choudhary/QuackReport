@@ -33,7 +33,7 @@ public class EarthquakeAsyncTaskLoader extends AsyncTaskLoader<List<Earthquake>>
             return null;
         }
         try {
-            return QueryUtil.getQuakeData(mUrl);
+            return new QueryUtil().getQuakeData(mUrl);
         } catch (IOException e) {
             e.printStackTrace();
         }
