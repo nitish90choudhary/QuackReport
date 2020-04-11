@@ -7,9 +7,9 @@ import androidx.annotation.Nullable;
 import androidx.loader.content.AsyncTaskLoader;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
-public class EarthquakeAsyncTaskLoader extends AsyncTaskLoader<ArrayList<Earthquake>> {
+public class EarthquakeAsyncTaskLoader extends AsyncTaskLoader<List<Earthquake>> {
     /**
      * Tag for log messages
      */
@@ -27,7 +27,7 @@ public class EarthquakeAsyncTaskLoader extends AsyncTaskLoader<ArrayList<Earthqu
 
     @Nullable
     @Override
-    public ArrayList<Earthquake> loadInBackground() {
+    public List<Earthquake> loadInBackground() {
         // Don't perform the request if there are no URLs, or the first URL is null.
         if (mUrl == null) {
             return null;
