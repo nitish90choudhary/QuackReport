@@ -1,6 +1,8 @@
 package com.example.quakereport;
 
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -35,11 +37,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
         rootListView = findViewById(R.id.rootListView);
         emptyStateView = findViewById(R.id.empty_view);
-        loadingProgress = findViewById(R.id.dataProgress);
-
         rootListView.setEmptyView(emptyStateView);
+        loadingProgress = findViewById(R.id.dataProgress);
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
-        getSupportLoaderManager().initLoader(0, null, this).forceLoad();
+        if (networkInfo == null)
+            emptyStateView.setText("No Internet connection!");
+        else if (networkInfo.isConnected())
+            getSupportLoaderManager().initLoader(0, null, this).forceLoad();
+        else
+            emptyStateView.setText("No Internet connection!");
 
         earthquakeArrayAdapter = new QuakeAdapter(MainActivity.this, new ArrayList<Earthquake>());
 
