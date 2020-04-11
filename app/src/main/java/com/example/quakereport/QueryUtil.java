@@ -25,7 +25,11 @@ public class QueryUtil {
     private static String result = "";
 
     public static ArrayList<Earthquake> getQuakeData(String url) throws IOException {
-
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ArrayList<Earthquake> earthquakes = null;
         result = makeHttpCall(new URL(url));
         try {

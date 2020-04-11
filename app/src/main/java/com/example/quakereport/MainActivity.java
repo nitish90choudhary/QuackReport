@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final String requestURL = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2015-01-01&endtime=2016-05-02&minfelt=50&minmagnitude=2";
     ListView rootListView;
     TextView emptyStateView;
+    View loadingProgress;
     QuakeAdapter earthquakeArrayAdapter;
 
     @Override
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         setContentView(R.layout.activity_main);
         rootListView = findViewById(R.id.rootListView);
         emptyStateView = findViewById(R.id.empty_view);
+        loadingProgress = findViewById(R.id.dataProgress);
 
         rootListView.setEmptyView(emptyStateView);
 
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @NonNull
     @Override
     public Loader<List<Earthquake>> onCreateLoader(int id, @Nullable Bundle args) {
+        loadingProgress.setVisibility(View.VISIBLE);
         return new EarthquakeAsyncTaskLoader(this, requestURL);
     }
 
@@ -70,6 +73,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         if (data != null && !data.isEmpty()) {
             earthquakeArrayAdapter.addAll(data);
         }
+        loadingProgress.setVisibility(View.GONE);
     }
 
     @Override
